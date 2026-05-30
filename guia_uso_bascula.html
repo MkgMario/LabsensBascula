@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Uso · Báscula Instrumentada</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --surface2: #1c2030;
+    --border: #252a3a;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --warn: #f59e0b;
+    --success: #10b981;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #111827 50%, #0d0f14 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(124,58,237,0.12);
+    border: 1px solid rgba(124,58,237,0.35);
+    color: #c084fc;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+  }
+  h1 span { color: #c084fc; }
+  .subtitle {
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .tab-nav {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-nav a.active { color: #c084fc; border-bottom-color: #c084fc; }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .intro-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid #c084fc;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .intro-box strong { color: var(--text); }
+
+  .highlight-box {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+  .highlight-box .big {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .highlight-box p {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #c084fc;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: var(--sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .step-card:hover { border-color: rgba(192,132,252,0.4); }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bg);
+    background: #c084fc;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title { font-weight: 600; font-size: 15px; color: #fff; }
+
+  .step-body {
+    padding: 1.25rem;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .step-body p { margin-bottom: 0.75rem; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  /* REALTERM SCREEN */
+  .rt-screen {
+    background: #000;
+    border: 2px solid #333;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #00ff41;
+    margin: 0.75rem 0;
+    line-height: 2;
+    overflow-x: auto;
+  }
+  .rt-screen .dim { color: #444; }
+  .rt-screen .hi { color: #fff; background: rgba(255,255,255,0.1); padding: 0 3px; }
+  .rt-screen .val { color: #00d4ff; }
+  .rt-screen .label { color: #f59e0b; }
+
+  /* CONFIG BOX */
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+  }
+  @media (max-width: 500px) { .config-grid { grid-template-columns: 1fr; } }
+
+  .config-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+  }
+  .config-key {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .config-val {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .alert {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 0.75rem 0 0.25rem;
+  }
+  .alert-warn {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.25);
+    color: #fcd34d;
+  }
+  .alert-info {
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+  }
+  .alert-success {
+    background: rgba(16,185,129,0.07);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: #6ee7b7;
+  }
+  .alert-icon { font-size: 15px; flex-shrink: 0; line-height: 1.5; }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 1rem 0;
+  }
+  .flow-node {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 1.25rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+  }
+  .flow-node.hl { border-color: var(--accent); color: var(--accent); }
+  .flow-node.hl2 { border-color: #c084fc; color: #c084fc; }
+  .flow-node.hl3 { border-color: #10b981; color: #6ee7b7; }
+  .flow-arrow {
+    font-family: var(--mono);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 0.2rem 0;
+  }
+
+  /* FAQ */
+  .faq { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 0.9rem 1.25rem;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    cursor: default;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .faq-q span.icon { color: #c084fc; flex-shrink: 0; }
+  .faq-a {
+    padding: 0 1.25rem 1rem 2.5rem;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+  footer a { color: #c084fc; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Laboratorio · PUCV · Escuela de Ingeniería Eléctrica</div>
+  <h1>Báscula <span>Instrumentada</span></h1>
+  <p class="subtitle">Guía de Uso · Cómo funciona y cómo recibir datos con RealTerm</p>
+</header>
+
+<nav class="tab-nav">
+  <a href="guia_armado_bascula.html">⚙ ARMADO</a>
+  <a href="guia_uso_bascula.html" class="active">▶ USO &amp; CONEXIÓN</a>
+</nav>
+
+<main>
+
+  <div class="intro-box">
+    Esta guía explica <strong>cómo funciona la báscula</strong> y cómo conectarla al PC para recibir datos en tiempo real.
+    Una vez que el microcontrolador tiene el firmware cargado, <strong>no necesitas programarlo nunca más</strong> —
+    solo conectar el cable USB y abrir RealTerm.
+  </div>
+
+  <!-- CONCEPTO GENERAL -->
+  <div class="highlight-box">
+    <div class="big">⚡ Conecta el USB → abre RealTerm → ya está midiendo</div>
+    <p>El XIAO ESP32-C6 inicia automáticamente y comienza a enviar valores de peso por el puerto serie cada vez que lo conectas.</p>
+  </div>
+
+  <!-- CÓMO FUNCIONA -->
+  <div class="section-label">01 · Principio de funcionamiento</div>
+  <h2>¿Cómo funciona la báscula?</h2>
+
+  <div class="flow">
+    <div class="flow-node hl">① Peso aplicado sobre la plataforma</div>
+    <div class="flow-arrow">↓ deformación mecánica</div>
+    <div class="flow-node">② Celda de carga (galga extensiométrica)<br><small style="color:var(--text-muted); font-size:11px;">convierte fuerza → voltaje diferencial (mV)</small></div>
+    <div class="flow-arrow">↓ señal muy pequeña (~mV)</div>
+    <div class="flow-node">③ Amplificador INA131<br><small style="color:var(--text-muted); font-size:11px;">amplifica x~125, referencia centrada en 2.5 V</small></div>
+    <div class="flow-arrow">↓ señal amplificada (~0–5 V)</div>
+    <div class="flow-node">④ ADC ADS1115 (16 bits)<br><small style="color:var(--text-muted); font-size:11px;">convierte la señal analógica a número digital por I2C</small></div>
+    <div class="flow-arrow">↓ datos digitales por I2C</div>
+    <div class="flow-node hl2">⑤ XIAO ESP32-C6<br><small style="font-size:11px;">lee el ADC, calcula gramos, envía por USB (UART)</small></div>
+    <div class="flow-arrow">↓ datos en texto por puerto serie</div>
+    <div class="flow-node hl3">⑥ RealTerm en tu PC<br><small style="font-size:11px;">muestra los valores en pantalla en tiempo real</small></div>
+  </div>
+
+  <p style="color:var(--text-dim); font-size:14px; margin-top:1rem;">
+    La báscula mide el peso aplicado <strong>de forma continua</strong>. Cada línea que aparece en RealTerm es una nueva lectura (aproximadamente 20 veces por segundo).
+  </p>
+
+  <!-- PASO A PASO USO -->
+  <div class="section-label" style="margin-top:2.5rem;">02 · Conectar y usar</div>
+  <h2>Pasos para recibir datos</h2>
+
+  <div class="steps">
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <div class="step-title">Conectar el cable USB-C al PC</div>
+      </div>
+      <div class="step-body">
+        <p>Conecta el XIAO ESP32-C6 al computador usando el <strong>cable USB-C</strong>. El microcontrolador se enciende automáticamente y empieza a tomar mediciones.</p>
+        <p>No hace falta presionar ningún botón. El firmware arranca solo.</p>
+        <div class="alert alert-success">
+          <span class="alert-icon">✓</span>
+          <span>El dispositivo queda configurado de forma permanente. Solo necesitas conectar el cable USB cada vez que quieras medir.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <div class="step-title">Identificar el puerto COM en Windows</div>
+      </div>
+      <div class="step-body">
+        <p>Abre el <strong>Administrador de dispositivos</strong> (botón derecho en el ícono de Windows → Administrador de dispositivos).</p>
+        <p>Busca la sección <strong>"Puertos (COM y LPT)"</strong>. Verás algo como:</p>
+
+        <div class="rt-screen">
+<span class="dim">Puertos (COM y LPT)</span>
+  → <span class="hi">USB Serial Device (COM5)</span>   ← este es el XIAO
+        </div>
+
+        <p>Anota el número del puerto (en este ejemplo, <strong>COM5</strong>). Puede ser cualquier número.</p>
+        <div class="alert alert-warn">
+          <span class="alert-icon">⚠</span>
+          <span>El número de COM puede cambiar según el puerto USB que uses. Si no aparece nada, instala el driver CH340 o CP2102 según la versión de tu placa.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title">Abrir RealTerm y configurar el puerto</div>
+      </div>
+      <div class="step-body">
+        <p>Abre la aplicación <strong>RealTerm</strong>. Si no la tienes, descárgala gratis desde <code style="font-family:var(--mono); color:var(--accent); font-size:12px;">realterm.sourceforge.net</code></p>
+
+        <p>En la pestaña <strong>"Port"</strong>, configura estos parámetros:</p>
+
+        <div class="config-grid">
+          <div class="config-item">
+            <div class="config-key">Baud rate</div>
+            <div class="config-val">115200</div>
+          </div>
+          <div class="config-item">
+            <div class="config-key">Port</div>
+            <div class="config-val">COM5 (el tuyo)</div>
+          </div>
+          <div class="config-item">
+            <div class="config-key">Data bits</div>
+            <div class="config-val">8</div>
+          </div>
+          <div class="config-item">
+            <div class="config-key">Parity</div>
+            <div class="config-val">None</div>
+          </div>
+          <div class="config-item">
+            <div class="config-key">Stop bits</div>
+            <div class="config-val">1</div>
+          </div>
+          <div class="config-item">
+            <div class="config-key">Flow control</div>
+            <div class="config-val">None</div>
+          </div>
+        </div>
+
+        <p style="margin-top:0.75rem;">Haz clic en el botón <strong style="color:#fff;">"Open"</strong> (o "Change"). Si el puerto está bien configurado, verá los datos aparecer de inmediato.</p>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <span>El baud rate <strong>115200</strong> debe coincidir exactamente con el configurado en el firmware del XIAO. Si ves caracteres extraños, revisa este valor.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <div class="step-title">Ver los datos en pantalla</div>
+      </div>
+      <div class="step-body">
+        <p>Una vez abierto el puerto, la ventana de RealTerm mostrará una línea nueva por cada lectura. Los valores corresponden al <strong>peso en gramos</strong>:</p>
+
+        <div class="rt-screen">
+<span class="label">Báscula PUCV · Puerto COM5 · 115200 baud</span>
+
+<span class="val">0.12</span>
+<span class="val">0.08</span>
+<span class="val">0.11</span>   <span class="dim">← sin peso (ruido de fondo ≈ ±0.5 g)</span>
+<span class="val">0.09</span>
+<span class="val">248.7</span>
+<span class="val">249.1</span>
+<span class="val">248.9</span>  <span class="dim">← peso colocado (~250 g)</span>
+<span class="val">249.3</span>
+<span class="val">249.0</span>
+<span class="val">0.10</span>   <span class="dim">← peso retirado</span>
+<span class="val">0.09</span>
+        </div>
+
+        <p>Cada número es una medición independiente. El peso se actualiza en tiempo real cada vez que cambia la carga sobre la plataforma.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <div class="step-title">Realizar la tara (poner en cero)</div>
+      </div>
+      <div class="step-body">
+        <p>Antes de cada sesión de medición, conviene hacer la <strong>tara</strong>: descontar el peso de cualquier objeto que esté sobre la báscula (bandeja, recipiente, etc.).</p>
+
+        <p>Dependiendo del firmware implementado, esto puede hacerse de dos formas:</p>
+
+        <ol style="list-style:decimal; padding-left:1.25rem; font-size:14px; color:var(--text-dim);">
+          <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Tara por software:</strong> el firmware tiene un comando de tara — envía una letra por RealTerm (ej: <code style="font-family:var(--mono); color:var(--accent);">'t'</code>) para resetear el cero.</li>
+          <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Tara manual:</strong> anota el valor sin peso y réstalo mentalmente, o ajusta el factor de offset en el firmware.</li>
+        </ol>
+
+        <div class="alert alert-success">
+          <span class="alert-icon">✓</span>
+          <span>La tara no afecta la calibración. Solo ajusta el punto de cero para la sesión actual.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">6</div>
+        <div class="step-title">Guardar datos (opcional)</div>
+      </div>
+      <div class="step-body">
+        <p>Si quieres guardar los datos para analizarlos después, RealTerm permite capturar todo lo que recibe en un archivo de texto:</p>
+
+        <ol style="list-style:decimal; padding-left:1.25rem; font-size:14px; color:var(--text-dim);">
+          <li style="margin-bottom:0.4rem;">Ve a la pestaña <strong style="color:var(--text);">"Capture"</strong> en RealTerm.</li>
+          <li style="margin-bottom:0.4rem;">Haz clic en <strong style="color:var(--text);">"Start"</strong> para comenzar a grabar.</li>
+          <li style="margin-bottom:0.4rem;">Haz clic en <strong style="color:var(--text);">"Stop"</strong> cuando termines.</li>
+          <li style="margin-bottom:0.4rem;">El archivo <code style="font-family:var(--mono); color:var(--accent); font-size:12px;">.txt</code> se puede abrir en Excel o analizarlo con Python.</li>
+        </ol>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <span>El archivo guardado tendrá una lectura por línea. Puedes importarlo fácilmente a Excel usando "Datos → Desde texto".</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <div class="section-label">03 · Problemas comunes</div>
+  <h2>Preguntas frecuentes</h2>
+
+  <div class="faq">
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="icon">?</span> No veo ningún dato en RealTerm</div>
+      <div class="faq-a">
+        Verifica que el número de COM en RealTerm coincida con el que aparece en el Administrador de dispositivos. Asegúrate también que el baud rate sea exactamente 115200. Si el puerto no aparece, prueba instalar el driver del chip USB de la placa (CH340 o CP2102).
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="icon">?</span> Veo caracteres extraños (símbolos raros, cuadrados)</div>
+      <div class="faq-a">
+        El baud rate no coincide. Cambia el valor en RealTerm al mismo que tiene el firmware (115200 por defecto). Cierra y vuelve a abrir el puerto después de cambiar la configuración.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="icon">?</span> Los valores no vuelven a cero cuando retiro el peso</div>
+      <div class="faq-a">
+        Necesitas hacer la tara. Hay un pequeño offset natural en el sensor. Si el firmware no tiene comando de tara, desconecta y reconecta el USB — el firmware reinicia y toma el valor actual como cero.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="icon">?</span> El valor oscila mucho incluso sin peso</div>
+      <div class="faq-a">
+        Un pequeño ruido es normal (±0.5–2 g). Si el ruido es muy grande (±50 g o más), revisa que la tierra común esté bien conectada entre todos los componentes, y que los cables de la celda no estén cerca de fuentes de interferencia (cables de alimentación, cargadores, etc.).
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="icon">?</span> El peso que muestra no corresponde al peso real</div>
+      <div class="faq-a">
+        El factor de calibración no está bien ajustado. Sigue el procedimiento de calibración descrito en la guía de armado: toma el valor ADC sin carga y con carga conocida, y calcula el factor correcto.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="icon">?</span> ¿Hay que reconfigurar el XIAO cada vez?</div>
+      <div class="faq-a">
+        <strong>No.</strong> Una vez cargado el firmware, el XIAO queda configurado de forma permanente en su memoria flash. Cada vez que lo conectes al USB, arrancará automáticamente y comenzará a enviar datos. No necesitas Arduino IDE ni ningún otro programa adicional.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RESUMEN RÁPIDO -->
+  <div class="section-label">04 · Resumen</div>
+  <h2>Pasos rápidos para medir</h2>
+
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1.5rem; font-size:14px; color:var(--text-dim);">
+    <div style="display:flex; flex-direction:column; gap:0.75rem;">
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+        <span style="font-family:var(--mono); color:#c084fc; font-size:13px; flex-shrink:0; margin-top:2px;">1.</span>
+        <span>Conecta el cable <strong style="color:var(--text);">USB-C</strong> del XIAO al computador</span>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+        <span style="font-family:var(--mono); color:#c084fc; font-size:13px; flex-shrink:0; margin-top:2px;">2.</span>
+        <span>Abre <strong style="color:var(--text);">RealTerm</strong> → configura el puerto COM correcto → baud rate 115200 → clic en <strong style="color:var(--text);">Open</strong></span>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+        <span style="font-family:var(--mono); color:#c084fc; font-size:13px; flex-shrink:0; margin-top:2px;">3.</span>
+        <span>Asegúrate de que la báscula esté <strong style="color:var(--text);">sin carga</strong> y verifica que los valores sean cercanos a 0</span>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+        <span style="font-family:var(--mono); color:#c084fc; font-size:13px; flex-shrink:0; margin-top:2px;">4.</span>
+        <span>Coloca el objeto a pesar sobre la plataforma y lee el valor en pantalla</span>
+      </div>
+      <div style="display:flex; gap:1rem; align-items:flex-start;">
+        <span style="font-family:var(--mono); color:#c084fc; font-size:13px; flex-shrink:0; margin-top:2px;">5.</span>
+        <span>Para terminar, cierra el puerto en RealTerm y desconecta el USB</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  PUCV · Escuela de Ingeniería Eléctrica · Báscula Instrumentada ·
+  <a href="guia_armado_bascula.html">← Ver guía de armado</a>
+</footer>
+
+</body>
+</html>
