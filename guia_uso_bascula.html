@@ -623,6 +623,103 @@
 
 </main>
 
+<hr style="border:none; border-top:1px solid #252a3a; margin:2.5rem 0;">
+
+<section style="max-width:760px; margin:0 auto; padding:0 1.25rem 3rem;">
+  <p style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; color:#c084fc; text-transform:uppercase; margin-bottom:0.5rem;">05 · Actividades prácticas</p>
+  <h2 style="font-family:'DM Sans',sans-serif; font-size:1.25rem; font-weight:600; color:#fff; margin-bottom:1.25rem; padding-bottom:0.5rem; border-bottom:1px solid #252a3a;">Tareas para estudiantes</h2>
+
+  <!-- TAREA 1 -->
+  <div style="background:#151820; border:1px solid #252a3a; border-radius:8px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-bottom:1px solid #252a3a;">
+      <div style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:#0d0f14; background:#c084fc; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</div>
+      <div style="font-weight:600; font-size:15px; color:#fff;">Registro continuo de datos en reposo (2 horas)</div>
+    </div>
+    <div style="padding:1.25rem; color:#94a3b8; font-size:14px;">
+      <p style="margin-bottom:0.75rem;"><strong style="color:#e2e8f0;">Objetivo:</strong> Observar el comportamiento de la señal de la celda de carga durante un período prolongado sin aplicar peso, identificando ruido de fondo, deriva (drift) y estabilidad del sistema.</p>
+      
+      <p style="margin-bottom:0.5rem; color:#c084fc; font-weight:600;">Procedimiento:</p>
+      <div style="margin-bottom:0.75rem; padding-left:0.5rem;">
+        <p style="margin-bottom:0.4rem;">1. Conecta el XIAO ESP32-C6 al computador por USB-C.</p>
+        <p style="margin-bottom:0.4rem;">2. Abre RealTerm con la configuración indicada (115200 baud, puerto COM correcto).</p>
+        <p style="margin-bottom:0.4rem;">3. Asegúrate de que la báscula esté <strong style="color:#e2e8f0;">sin ningún peso</strong> sobre ella.</p>
+        <p style="margin-bottom:0.4rem;">4. Ve a la pestaña <strong style="color:#e2e8f0;">Capture</strong> en RealTerm.</p>
+        <p style="margin-bottom:0.4rem;">5. Haz clic en <strong style="color:#e2e8f0;">Start</strong> para comenzar la grabación.</p>
+        <p style="margin-bottom:0.4rem;">6. Deja el sistema grabando durante <strong style="color:#e2e8f0;">2 horas</strong> completas sin tocar ni mover nada.</p>
+        <p style="margin-bottom:0.4rem;">7. Al terminar las 2 horas, haz clic en <strong style="color:#e2e8f0;">Stop</strong>.</p>
+        <p style="margin-bottom:0.4rem;">8. Guarda el archivo .txt generado.</p>
+      </div>
+
+      <p style="margin-bottom:0.5rem; color:#c084fc; font-weight:600;">Análisis a realizar:</p>
+      <div style="margin-bottom:0.75rem; padding-left:0.5rem;">
+        <p style="margin-bottom:0.4rem;">• Importa el archivo .txt en Excel o Google Sheets.</p>
+        <p style="margin-bottom:0.4rem;">• Grafica los valores de cada canal (ADS y HX711) en función del tiempo.</p>
+        <p style="margin-bottom:0.4rem;">• Calcula el <strong style="color:#e2e8f0;">valor promedio</strong>, la <strong style="color:#e2e8f0;">desviación estándar</strong> y el <strong style="color:#e2e8f0;">rango</strong> (máximo − mínimo) de cada canal.</p>
+        <p style="margin-bottom:0.4rem;">• Identifica si existe <strong style="color:#e2e8f0;">deriva temporal</strong> — ¿la señal sube o baja lentamente con el tiempo?</p>
+        <p style="margin-bottom:0.4rem;">• Determina el <strong style="color:#e2e8f0;">nivel de ruido</strong> del sistema como porcentaje del rango completo de medición.</p>
+      </div>
+
+      <p style="margin-bottom:0.5rem; color:#c084fc; font-weight:600;">Preguntas a responder en el informe:</p>
+      <div style="padding-left:0.5rem;">
+        <p style="margin-bottom:0.4rem;">• ¿El sistema mantiene un valor estable de cero durante las 2 horas?</p>
+        <p style="margin-bottom:0.4rem;">• ¿Cuánto varía la señal sin carga aplicada? ¿Es aceptable para mediciones reales?</p>
+        <p style="margin-bottom:0.4rem;">• ¿Qué canal presenta menor ruido — el ADS1115 o el HX711? ¿Por qué crees que es así?</p>
+        <p style="margin-bottom:0.4rem;">• ¿Qué efecto podría tener la temperatura del laboratorio en la señal?</p>
+      </div>
+
+      <div style="display:flex; gap:0.75rem; padding:0.9rem 1rem; border-radius:6px; font-size:13px; margin-top:0.75rem; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.2); color:#00d4ff;">
+        <span style="font-size:15px; flex-shrink:0;">ℹ</span>
+        <span><strong>Duración estimada:</strong> 2 horas de grabación + 30 minutos de análisis. El archivo generado tendrá aproximadamente 5.7 millones de líneas (a 800 Hz durante 2 horas).</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAREA 2 -->
+  <div style="background:#151820; border:1px solid #252a3a; border-radius:8px; overflow:hidden; margin-bottom:1.5rem;">
+    <div style="display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-bottom:1px solid #252a3a;">
+      <div style="font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:#0d0f14; background:#c084fc; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</div>
+      <div style="font-weight:600; font-size:15px; color:#fff;">Detección de cambios de peso con monedas (30 minutos)</div>
+    </div>
+    <div style="padding:1.25rem; color:#94a3b8; font-size:14px;">
+      <p style="margin-bottom:0.75rem;"><strong style="color:#e2e8f0;">Objetivo:</strong> Determinar la cantidad de monedas agregadas sobre la báscula únicamente a partir del análisis del gráfico de datos, sin saber previamente cuántas se colocaron ni en qué momento.</p>
+      
+      <p style="margin-bottom:0.5rem; color:#c084fc; font-weight:600;">Procedimiento:</p>
+      <div style="margin-bottom:0.75rem; padding-left:0.5rem;">
+        <p style="margin-bottom:0.4rem;">1. Conecta el sistema y abre RealTerm como en la tarea anterior.</p>
+        <p style="margin-bottom:0.4rem;">2. Asegúrate de que la báscula esté sin peso.</p>
+        <p style="margin-bottom:0.4rem;">3. Inicia la grabación con <strong style="color:#e2e8f0;">Capture → Start</strong>.</p>
+        <p style="margin-bottom:0.4rem;">4. Un compañero (o el profesor) será el encargado de agregar monedas <strong style="color:#e2e8f0;">cada 2 a 4 minutos</strong> sobre la báscula sin que tú veas cuántas coloca cada vez.</p>
+        <p style="margin-bottom:0.4rem;">5. Deja grabando durante <strong style="color:#e2e8f0;">30 minutos</strong>.</p>
+        <p style="margin-bottom:0.4rem;">6. Al terminar, haz clic en <strong style="color:#e2e8f0;">Stop</strong> y guarda el archivo.</p>
+      </div>
+
+      <p style="margin-bottom:0.5rem; color:#c084fc; font-weight:600;">Análisis a realizar:</p>
+      <div style="margin-bottom:0.75rem; padding-left:0.5rem;">
+        <p style="margin-bottom:0.4rem;">• Importa el archivo en Excel o Google Sheets.</p>
+        <p style="margin-bottom:0.4rem;">• Grafica los valores en función del tiempo.</p>
+        <p style="margin-bottom:0.4rem;">• Identifica los <strong style="color:#e2e8f0;">cambios escalonados</strong> en el gráfico — cada escalón representa un momento en que se agregó una o más monedas.</p>
+        <p style="margin-bottom:0.4rem;">• Cuenta cuántos escalones hay — eso te dice cuántas veces se agregaron monedas.</p>
+        <p style="margin-bottom:0.4rem;">• Mide la <strong style="color:#e2e8f0;">diferencia de amplitud</strong> entre cada escalón — si conoces el peso de una moneda, puedes calcular cuántas se agregaron en cada vez.</p>
+      </div>
+
+      <p style="margin-bottom:0.5rem; color:#c084fc; font-weight:600;">Preguntas a responder en el informe:</p>
+      <div style="padding-left:0.5rem;">
+        <p style="margin-bottom:0.4rem;">• ¿Cuántas veces se agregaron monedas sobre la báscula?</p>
+        <p style="margin-bottom:0.4rem;">• ¿Cuántas monedas crees que se colocaron en total? Justifica con los datos.</p>
+        <p style="margin-bottom:0.4rem;">• ¿Pudiste distinguir claramente cada cambio en el gráfico?</p>
+        <p style="margin-bottom:0.4rem;">• ¿Qué canal del sistema (ADS1115 o HX711) fue más útil para detectar los cambios? ¿Por qué?</p>
+        <p style="margin-bottom:0.4rem;">• Si una moneda de $100 CLP pesa aproximadamente 7 gramos, ¿coincide tu cálculo con la cantidad real?</p>
+      </div>
+
+      <div style="display:flex; gap:0.75rem; padding:0.9rem 1rem; border-radius:6px; font-size:13px; margin-top:0.75rem; background:rgba(16,185,129,0.07); border:1px solid rgba(16,185,129,0.25); color:#6ee7b7;">
+        <span style="font-size:15px; flex-shrink:0;">✓</span>
+        <span><strong>Tip:</strong> Para un análisis más claro, intenta reducir la frecuencia de datos antes de graficar. Puedes promediar cada 800 puntos (1 segundo) para obtener un gráfico más limpio y manejable.</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+  
 <footer>
   PUCV · Escuela de Ingeniería Eléctrica · Báscula Instrumentada ·
   <a href="guia_armado_bascula.html">← Ver guía de armado</a>
