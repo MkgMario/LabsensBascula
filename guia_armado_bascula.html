@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Armado · Báscula Instrumentada</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --surface2: #1c2030;
+    --border: #252a3a;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --warn: #f59e0b;
+    --success: #10b981;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #111827 50%, #0d0f14 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 150px; height: 150px;
+    background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #fff;
+  }
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  /* NAV TABS */
+  .tab-nav {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-nav a.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  /* INTRO BOX */
+  .intro-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .intro-box strong { color: var(--text); }
+
+  /* SECTION TITLE */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: var(--sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* COMPONENT TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2.5rem;
+    font-size: 14px;
+  }
+  .comp-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table td {
+    padding: 0.7rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .qty {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 13px;
+  }
+  .comp-name { font-weight: 500; color: var(--text); }
+  .comp-note { color: var(--text-muted); font-size: 13px; }
+
+  /* STEP CARD */
+  .steps { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .step-card:hover::before { opacity: 1; }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent);
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+  }
+
+  .step-body {
+    padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .step-body p { margin-bottom: 0.75rem; }
+  .step-body p:last-child { margin-bottom: 0; }
+
+  /* WIRING TABLE */
+  .wire-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 0.75rem 0 0.5rem;
+  }
+  .wire-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+  }
+  .wire-table td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .wire-table tr:last-child td { border-bottom: none; }
+
+  .pin { font-family: var(--mono); font-weight: 700; }
+  .pin.c1 { color: #ef4444; }   /* rojo */
+  .pin.c2 { color: #3b82f6; }   /* azul */
+  .pin.c3 { color: #f59e0b; }   /* amarillo */
+  .pin.c4 { color: #6ee7b7; }   /* verde */
+  .pin.c5 { color: #a78bfa; }   /* lila */
+  .pin.c6 { color: var(--accent); } /* cyan */
+
+  /* ALERT BOXES */
+  .alert {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 0.75rem 0 0.25rem;
+  }
+  .alert-warn {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.25);
+    color: #fcd34d;
+  }
+  .alert-info {
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+  }
+  .alert-success {
+    background: rgba(16,185,129,0.07);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: #6ee7b7;
+  }
+  .alert-icon { font-size: 15px; flex-shrink: 0; line-height: 1.5; }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #7dd3fc;
+    overflow-x: auto;
+    margin: 0.75rem 0;
+    line-height: 1.8;
+  }
+  .code-block .comment { color: var(--text-muted); }
+  .code-block .kw { color: #c084fc; }
+  .code-block .str { color: #86efac; }
+  .code-block .num { color: var(--accent); }
+
+  /* DIAGRAM */
+  .diagram-box {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 0.75rem 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    overflow-x: auto;
+    line-height: 1.9;
+  }
+  .diagram-box .hl { color: var(--accent); }
+  .diagram-box .hl2 { color: #c084fc; }
+  .diagram-box .hl3 { color: #86efac; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin: 0.5rem 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.3rem 0;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .checklist li::before {
+    content: '□';
+    font-family: var(--mono);
+    color: var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Laboratorio · PUCV · Escuela de Ingeniería Eléctrica</div>
+  <h1>Báscula <span>Instrumentada</span></h1>
+  <p class="subtitle">Guía de Armado · Basada en celda de carga + INA131 + ADS1115 + XIAO ESP32-C6</p>
+</header>
+
+<nav class="tab-nav">
+  <a href="guia_armado_bascula.html" class="active">⚙ ARMADO</a>
+  <a href="guia_uso_bascula.html">▶ USO &amp; CONEXIÓN</a>
+</nav>
+
+<main>
+
+  <div class="intro-box">
+    Esta guía explica cómo armar físicamente la báscula instrumentada desde cero.
+    Cubre la preparación mecánica, las conexiones eléctricas y la carga del firmware en el microcontrolador.
+    <br><br>
+    <strong>Tiempo estimado de armado:</strong> 2–3 horas con experiencia básica en electrónica.
+  </div>
+
+  <!-- COMPONENTES -->
+  <div class="section-label">01 · Lista de materiales</div>
+  <h2>Componentes necesarios</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Cant.</th>
+        <th>Componente</th>
+        <th>Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="qty">1</td>
+        <td class="comp-name">Celda de carga de punto simple</td>
+        <td class="comp-note">5 kg recomendado. Modelo TAL220 o similar.</td>
+      </tr>
+      <tr>
+        <td class="qty">1</td>
+        <td class="comp-name">Amplificador INA131</td>
+        <td class="comp-note">Texas Instruments. Paquete PDIP-8.</td>
+      </tr>
+      <tr>
+        <td class="qty">1</td>
+        <td class="comp-name">Módulo ADC ADS1115</td>
+        <td class="comp-note">16 bits, protocolo I2C. Módulo breakout.</td>
+      </tr>
+      <tr>
+        <td class="qty">1</td>
+        <td class="comp-name">Microcontrolador XIAO ESP32-C6</td>
+        <td class="comp-note">Seeed Studio. Con cable USB-C.</td>
+      </tr>
+      <tr>
+        <td class="qty">1</td>
+        <td class="comp-name">Placa perforada de prototipado</td>
+        <td class="comp-note">~7×9 cm es suficiente.</td>
+      </tr>
+      <tr>
+        <td class="qty">1</td>
+        <td class="comp-name">Potenciómetro trimmer 10 kΩ</td>
+        <td class="comp-note">Para ajustar ganancia del INA131.</td>
+      </tr>
+      <tr>
+        <td class="qty">2</td>
+        <td class="comp-name">Resistencias 10 kΩ</td>
+        <td class="comp-note">Para divisor de tensión (referencia 2.5 V).</td>
+      </tr>
+      <tr>
+        <td class="qty">3</td>
+        <td class="comp-name">Capacitores 100 nF</td>
+        <td class="comp-note">Desacople de alimentación.</td>
+      </tr>
+      <tr>
+        <td class="qty">—</td>
+        <td class="comp-name">Cable de conexión / alambre AWG 26</td>
+        <td class="comp-note">Para interconexión punto a punto.</td>
+      </tr>
+      <tr>
+        <td class="qty">—</td>
+        <td class="comp-name">Plancha de acero o MDF</td>
+        <td class="comp-note">Como base/plataforma de apoyo.</td>
+      </tr>
+      <tr>
+        <td class="qty">—</td>
+        <td class="comp-name">Tornillos M3 + separadores</td>
+        <td class="comp-note">Para fijar la celda de carga.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PASO 1: MECÁNICA -->
+  <div class="section-label">02 · Ensamblado</div>
+  <h2>Pasos de construcción</h2>
+
+  <div class="steps">
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <div class="step-title">Montar la celda de carga en la base</div>
+      </div>
+      <div class="step-body">
+        <p>La celda de carga de punto simple debe montarse con <strong>un extremo fijo</strong> (atornillado a la base o estructura rígida) y el <strong>otro extremo libre</strong>, sobre el cual se apoya la plancha de medición.</p>
+        <p>Esto se llama configuración <em>flotante</em>: permite que la celda capture la flexión producida por el peso, sin que la estructura completa le transfiera esfuerzos no deseados.</p>
+
+        <div class="diagram-box">
+<span class="hl">Fuerza aplicada (peso)</span>
+         ↓↓↓↓
+┌────────────────────────────┐  ← Plancha de medición (acero/MDF)
+│                            │
+│   <span class="hl3">[ CELDA DE CARGA ]</span>       │  ← Montada debajo de la plancha
+│   extremo libre ←→ fijo    │
+└────────────────────────────┘
+         ↓
+<span class="hl2">Base rígida (estructura)</span>
+        </div>
+
+        <div class="alert alert-warn">
+          <span class="alert-icon">⚠</span>
+          <span>No aprietes demasiado los tornillos del extremo libre — debe poder flexionarse levemente cuando se aplica carga.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <div class="step-title">Identificar los cables de la celda de carga</div>
+      </div>
+      <div class="step-body">
+        <p>La celda de carga tiene <strong>4 cables</strong> de salida que corresponden al puente de Wheatstone completo:</p>
+
+        <table class="wire-table">
+          <thead>
+            <tr><th>Color</th><th>Señal</th><th>Descripción</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pin c1">■ Rojo</span></td>
+              <td>E+ (Excitación +)</td>
+              <td>Alimentación positiva del puente → conectar a VCC (5 V)</td>
+            </tr>
+            <tr>
+              <td><span class="pin c2">■ Negro</span></td>
+              <td>E− (Excitación −)</td>
+              <td>Alimentación negativa del puente → conectar a GND</td>
+            </tr>
+            <tr>
+              <td><span class="pin c4">■ Verde</span></td>
+              <td>S+ (Señal +)</td>
+              <td>Salida diferencial positiva → V⁺_IN del INA131 (pin 3)</td>
+            </tr>
+            <tr>
+              <td><span class="pin c3">■ Blanco/Amarillo</span></td>
+              <td>S− (Señal −)</td>
+              <td>Salida diferencial negativa → V⁻_IN del INA131 (pin 2)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <span>Los colores pueden variar según el fabricante. Consulta el datasheet de tu celda específica si no coinciden.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title">Armar el circuito del INA131 en la placa perforada</div>
+      </div>
+      <div class="step-body">
+        <p>El INA131 amplifica la señal diferencial de la celda (del orden de mV) antes de enviarla al ADC.</p>
+
+        <table class="wire-table">
+          <thead>
+            <tr><th>Pin INA131</th><th>Conectar a</th><th>Descripción</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="pin c5">Pin 1 y 8</span></td><td>Potenciómetro trimmer 10 kΩ (RG)</td><td>Controla la ganancia</td></tr>
+            <tr><td><span class="pin c2">Pin 2 (V⁻_IN)</span></td><td>Cable S− de la celda</td><td>Entrada diferencial −</td></tr>
+            <tr><td><span class="pin c4">Pin 3 (V⁺_IN)</span></td><td>Cable S+ de la celda</td><td>Entrada diferencial +</td></tr>
+            <tr><td><span class="pin c2">Pin 4 (V−)</span></td><td>GND</td><td>Alimentación negativa</td></tr>
+            <tr><td><span class="pin c6">Pin 5 (REF)</span></td><td>Punto medio divisor resistivo (2.5 V)</td><td>Referencia de salida</td></tr>
+            <tr><td><span class="pin c6">Pin 6 (Vout)</span></td><td>Entrada AIN+ del ADS1115</td><td>Salida amplificada</td></tr>
+            <tr><td><span class="pin c1">Pin 7 (V+)</span></td><td>5 V</td><td>Alimentación positiva</td></tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top:0.75rem;">Para la referencia de 2.5 V, arma un divisor de tensión con dos resistencias de 10 kΩ entre 5 V y GND. El punto medio da exactamente 2.5 V.</p>
+
+        <div class="diagram-box">
+5V ──┬── R1 (10kΩ) ──┬── R2 (10kΩ) ── GND
+     │                │
+     │          <span class="hl">2.5 V → REF (pin 5)</span>
+        </div>
+
+        <div class="alert alert-warn">
+          <span class="alert-icon">⚠</span>
+          <span>Con RG = 10 kΩ la ganancia es ≈ 125. Ajusta el trimmer según la señal de tu celda — empieza con ganancia baja y sube gradualmente.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <div class="step-title">Conectar el módulo ADS1115</div>
+      </div>
+      <div class="step-body">
+        <p>El ADS1115 convierte la señal analógica amplificada en un número digital de 16 bits y lo envía al microcontrolador por I2C.</p>
+
+        <table class="wire-table">
+          <thead>
+            <tr><th>Pin ADS1115</th><th>Conectar a</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="pin c1">VDD</span></td><td>3.3 V del XIAO ESP32-C6</td></tr>
+            <tr><td><span class="pin c2">GND</span></td><td>GND</td></tr>
+            <tr><td><span class="pin c6">SCL</span></td><td>Pin SCL del XIAO (GPIO 7)</td></tr>
+            <tr><td><span class="pin c6">SDA</span></td><td>Pin SDA del XIAO (GPIO 6)</td></tr>
+            <tr><td><span class="pin c4">AIN0</span></td><td>Salida (pin 6) del INA131</td></tr>
+            <tr><td><span class="pin c3">AIN1</span></td><td>Referencia 2.5 V (punto medio del divisor)</td></tr>
+            <tr><td><span class="pin c5">ADDR</span></td><td>GND (dirección I2C = 0x48)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <span>El ADS1115 se usa en modo diferencial entre AIN0 y AIN1, lo que mide la variación respecto a la referencia de 2.5 V.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <div class="step-title">Conectar el XIAO ESP32-C6</div>
+      </div>
+      <div class="step-body">
+        <p>El microcontrolador recibe los datos del ADS1115 por I2C y los envía al computador por el puerto USB (UART serial).</p>
+
+        <table class="wire-table">
+          <thead>
+            <tr><th>XIAO GPIO</th><th>Conectar a</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="pin c1">5V (pin)</span></td><td>Alimentación del INA131 y divisor resistivo</td></tr>
+            <tr><td><span class="pin c4">3.3V (pin)</span></td><td>VDD del ADS1115</td></tr>
+            <tr><td><span class="pin c2">GND</span></td><td>GND de todos los componentes (tierra común)</td></tr>
+            <tr><td><span class="pin c6">GPIO 6 (SDA)</span></td><td>SDA del ADS1115</td></tr>
+            <tr><td><span class="pin c6">GPIO 7 (SCL)</span></td><td>SCL del ADS1115</td></tr>
+          </tbody>
+        </table>
+
+        <div class="alert alert-warn">
+          <span class="alert-icon">⚠</span>
+          <span>Asegúrate de que todos los componentes compartan la misma GND. Una tierra común flotante causa lecturas erráticas.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">6</div>
+        <div class="step-title">Cargar el firmware en el XIAO ESP32-C6</div>
+      </div>
+      <div class="step-body">
+        <p>Conecta el XIAO al PC por USB-C y abre el <strong>Arduino IDE</strong> (o PlatformIO). Instala el soporte para ESP32-C6 si aún no lo tienes.</p>
+
+        <p>El firmware hace lo siguiente:</p>
+        <ul style="list-style:none; margin: 0.5rem 0 0.75rem 0.25rem;">
+          <li style="margin-bottom:0.4rem;">📡 Lee el ADS1115 por I2C continuamente</li>
+          <li style="margin-bottom:0.4rem;">⚙ Convierte los valores ADC a gramos (usando el factor de calibración)</li>
+          <li style="margin-bottom:0.4rem;">📤 Envía los datos por <strong>UART serial</strong> al PC en texto legible</li>
+        </ul>
+
+        <div class="code-block">
+<span class="comment">// Fragmento representativo del firmware</span>
+<span class="kw">#include</span> <span class="str">&lt;Wire.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;Adafruit_ADS1X15.h&gt;</span>
+
+Adafruit_ADS1115 ads;
+<span class="kw">float</span> factor_cal = <span class="num">0.0</span>;  <span class="comment">// definido en calibración</span>
+
+<span class="kw">void</span> setup() {
+  Serial.begin(<span class="num">115200</span>);
+  ads.begin();
+  ads.setGain(GAIN_ONE); <span class="comment">// ±4.096V</span>
+}
+
+<span class="kw">void</span> loop() {
+  int16_t raw = ads.readADC_Differential_0_1();
+  <span class="kw">float</span> gramos = raw * factor_cal;
+  Serial.println(gramos);
+  delay(<span class="num">50</span>); <span class="comment">// ~20 muestras/s</span>
+}
+        </div>
+
+        <div class="alert alert-success">
+          <span class="alert-icon">✓</span>
+          <span>Una vez cargado el firmware, el XIAO queda configurado de forma permanente. No necesitas volver a programarlo — cada vez que lo conectes al PC, empezará a enviar datos automáticamente.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">7</div>
+        <div class="step-title">Calibración del sistema</div>
+      </div>
+      <div class="step-body">
+        <p>Con el sistema ensamblado y el firmware cargado, realiza la calibración antes del primer uso:</p>
+
+        <ol style="list-style:decimal; padding-left:1.25rem; font-size:14px; color:var(--text-dim);">
+          <li style="margin-bottom:0.5rem;">Conecta el XIAO al PC por USB-C y abre RealTerm (ver guía de uso).</li>
+          <li style="margin-bottom:0.5rem;">Con la báscula <strong>sin peso</strong>, anota el valor ADC promedio mostrado — ese es el <strong>offset (cero)</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Coloca un <strong>peso conocido</strong> (ej: 500 g) y anota el nuevo valor ADC.</li>
+          <li style="margin-bottom:0.5rem;">El factor de calibración es: <code style="font-family:var(--mono); color:var(--accent);">factor = masa_g / (ADC_con_peso − ADC_cero)</code></li>
+          <li style="margin-bottom:0.5rem;">Ingresa ese valor en el firmware como <code style="font-family:var(--mono); color:var(--accent);">factor_cal</code> y vuelve a cargarlo.</li>
+        </ol>
+
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <span>Después de calibrar solo necesitas re-tara antes de cada medición. La calibración no se repite a menos que cambies la celda o el firmware.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHECKLIST FINAL -->
+  <div class="section-label">03 · Verificación</div>
+  <h2>Lista de chequeo antes de usar</h2>
+
+  <ul class="checklist">
+    <li>Celda de carga fija en un extremo y libre en el otro</li>
+    <li>Los 4 cables de la celda correctamente identificados y conectados</li>
+    <li>INA131 alimentado con 5 V y GND</li>
+    <li>Referencia de 2.5 V conectada al pin REF (pin 5) del INA131</li>
+    <li>ADS1115 conectado por I2C al XIAO (SDA y SCL)</li>
+    <li>Tierra común entre todos los componentes</li>
+    <li>Firmware cargado y verificado en Arduino IDE (sin errores)</li>
+    <li>Calibración realizada con al menos un peso conocido</li>
+    <li>Al conectar el USB, se ven valores estables en RealTerm</li>
+  </ul>
+
+</main>
+
+<footer>
+  PUCV · Escuela de Ingeniería Eléctrica · Báscula Instrumentada ·
+  <a href="guia_uso_bascula.html">Ver guía de uso →</a>
+</footer>
+
+</body>
+</html>
